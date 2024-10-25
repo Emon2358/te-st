@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std/http/server.ts";
+import * as mod from "https://deno.land/std@0.224.0/http/server.ts";
 
 const handler = async (request: Request): Promise<Response> => {
   if (request.method === "POST" && request.url.endsWith("/proxy")) {
@@ -32,4 +32,5 @@ const handler = async (request: Request): Promise<Response> => {
   return new Response("Not Found", { status: 404 });
 };
 
-serve(handler);
+mod.serve(handler);
+
