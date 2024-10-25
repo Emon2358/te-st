@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxy Server</title>
+</head>
+<body>
+  <h1>Proxy Server</h1>
+  <form id="proxy-form">
+    <label for="url">Enter URL:</label>
+    <input type="text" id="url" name="url" required placeholder="https://example.com"><br>
+    <button type="submit">Access</button>
+  </form>
+
+  <h2>Response:</h2>
+  <pre id="response"></pre>
+
+  <script>
+    document.getElementById('proxy-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      const url = document.getElementById('url').value;
+      const response = await fetch('/proxy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+
+      const responseBody = await response.text();
+      document.getElementById('response').textContent = responseBody;
+    });
+  </script>
+</body>
+</html>
